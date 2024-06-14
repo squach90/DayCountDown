@@ -23,13 +23,25 @@ const Home = () => {
       if (selectedDate) {
         const now = new Date();
         const diff = intervalToDuration({ start: now, end: selectedDate });
-
-        const days = diff.days || 0;
+        let days = diff.days || 0;
+        const { months = 0 } = diff;
+        console.log("debug", diff);
+        days %= 30;
         const hours = diff.hours || 0;
         const minutes = diff.minutes || 0;
         const seconds = diff.seconds || 0;
 
-        setTimeLeft(`${days}:${hours}:${minutes}:${seconds}`);
+        const timeParts = [];
+        if (months > 0) {
+          timeParts.push(`${months} ${isEnglish ? "Months" : "Mois"}`);
+        }
+        timeParts.push(
+          `${days} days ${hours.toString().padStart(2, "0")}h${minutes
+            .toString()
+            .padStart(2, "0")}m${seconds.toString().padStart(2, "0")}s`
+        );
+
+        setTimeLeft(timeParts.join(" - "));
       }
     };
 
@@ -51,7 +63,7 @@ const Home = () => {
       className={`flex flex-col items-center justify-center min-h-screen gap-8 ${styles.container}`}
     >
       <h1 className="text-8xl mb-4 font-bold">
-        {isEnglish ? "Day Countdown" : "Compte à Rebours de Jour"}
+        {isEnglish ? "Day Countdown" : "Day Countdown"}
       </h1>
       <DatePicker
         selected={selectedDate}
