@@ -47,10 +47,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8 px-4 md:px-0">
-      <div className="text-8xl mb-10 font-bold">
+    <div
+      className={`flex flex-col items-center justify-center min-h-screen gap-8 ${styles.container}`}
+    >
+      <h1 className="text-8xl mb-4 font-bold">
         {isEnglish ? "Day Countdown" : "Compte à Rebours de Jour"}
-      </div>
+      </h1>
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
@@ -58,16 +60,16 @@ const Home = () => {
         dateFormat="Pp"
         className={styles.customDatepicker}
       />
-      <div className="text-4xl font-bold md:text-8xl">{timeLeft}</div>
-      <div className="text-gray-500 dark:text-gray-400 mt-4 text-center">
+      <div className="text-4xl font-bold">{timeLeft}</div>
+      <div className="text-gray-500 dark:text-gray-400 text-center">
         <span>{isEnglish ? "Days" : "Jours"}</span> -{" "}
         <span>{isEnglish ? "Hours" : "Heures"}</span> -{" "}
         <span>{isEnglish ? "Minutes" : "Minutes"}</span> -{" "}
         <span>{isEnglish ? "Seconds" : "Secondes"}</span>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 mt-4">
         <Button onClick={handleLanguageToggle}>
-          {isEnglish ? "Fran\u00E7ais" : "English"}
+          {isEnglish ? "Français" : "English"}
         </Button>
       </div>
     </div>
